@@ -1,0 +1,3 @@
+#!/bin/sh
+
+gnome-terminal -e 'sh -c "echo test; sleep 10"'
