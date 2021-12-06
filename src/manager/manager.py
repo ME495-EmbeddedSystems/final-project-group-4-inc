@@ -55,16 +55,21 @@ class manage:
             # print(ans)
         return ans
 
-    def fullSearch(self, arr, data):
+    def fullSearch(self, arr, data, threshold=6):
         """Returns a list of multiple values that can match with data"""
+        def compress(index):
+            return arr[index]
         if data == 0:
             threshold = 1
-        else:
-            threshold = 6
+        if threshold < -1:
+            return []
         ans = []
         for index, item in enumerate(arr):
-            if self.colorMatch(item, data, threshold):
+            if self.colorMatch(item, data, threshold-1):
                 ans.append(index)
+        candidate = self.fullSearch(list(map(compress, ans)), data)
+        if candidate != []:
+            return candidate
         return ans
 
     def colorMatch(self, a, b, threshold):
